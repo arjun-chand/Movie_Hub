@@ -1,0 +1,5 @@
+npm i express
+npm i mongoose
+npm i multer for file so we can upload file or image
+npm i cors
+npm i bodyparser
