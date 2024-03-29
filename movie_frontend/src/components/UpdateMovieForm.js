@@ -1,6 +1,95 @@
-import React from 'react'
+import React, { useState } from 'react'
+import MovieService from '../services/MovieService';
+import { movieArray } from './Movies';
 
 const UpdateMovieForm = () => {
+  const [formData, setFormData] = useState({
+    title: '',
+    description: '',
+    date:'',
+    image:'',
+    category:'',
+    rating:'',
+    source:''
+  
+  });
+  // const [title, setTitle] = useState("Movie");
+  // const [date, setDate] = useState("");
+  // const [director, setDirector] = useState("movie Director");
+  // const [description, setDescription] = useState("This is Description");
+  // const [category, setCategory] = useState("entertainment");
+  // const [image, setImage] = useState("");
+  // const [message, setMessage] = useState("");
+  // const [rating, setRating] = useState("");
+
+  // const handleSubmit = async (event) => {
+  //   event.preventDefault();
+
+  //   const formData = new FormData();
+  //   formData.append('title', title);
+  //   formData.append('date', date);
+  //   formData.append('director', director);
+  //   formData.append('description', description);
+  //   formData.append('category', category);
+  //   formData.append('image', image)
+
+  //   const response = await MovieService.create(formData);
+
+  //   console.log(response)
+
+  //   if (response.data.success == true) {
+  //     setMessage('Movie uploaded Successfully');
+  //   } else {
+  //     setMessage('Movie not uploaded')
+  //   }
+
+  //   setTimeout(function () {
+  //     setMessage('');
+  //   }, 2000)
+
+  //   event.target.reset();
+  // }
+
+  const handleData = (event)=>{
+    event.preventDefault();
+    const updatedMovie = movieArray.find((movie) => movie.title === title);
+    // Extract form values from formData
+    const { title, description, date, image, category, rating, source } = formData;
+
+    // Create a new movie object
+    if (updatedMovie) {
+      // Update the movie details
+     updatedMovie.title = title;
+     updatedMovie.description = description;
+     updatedMovie.date = date;
+     updatedMovie.image = image;
+     updatedMovie.category = category;
+     updatedMovie.rating = rating;
+     updatedMovie.source = source;
+
+      // Optionally, update the state or save to a backend server
+      // ...
+
+      // Clear the form fields (optional)
+      setFormData({
+        movieName: '',
+        // Reset other form fields...
+      });
+    } else {
+      // Display an error message (movie not found)
+      console.log('Movie not found!');
+    }
+  };
+
+    
+   // Handle form input changes
+   const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    setFormData({ ...formData, [name]: value });
+  };
+  
+
+
   return (
     <div className="d-flex justify-content-center align-items-center" style={{ minHeight: "100vh" }}>
       <form onSubmit={handleData}>

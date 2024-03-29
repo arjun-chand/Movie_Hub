@@ -1,7 +1,13 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { movieArray } from './Movies';
+import UpdateMovieForm from './UpdateMovieForm'
 
 const MoviesItem = (props) => {
+  const [showUpdateForm, setShowUpdateForm] = useState(false);
+
+  const toggleUpdateForm = () => {
+    setShowUpdateForm(!showUpdateForm);
+  };
 
   console.log(props.imageUrl);
   console.log(props.title);
@@ -61,7 +67,7 @@ const MoviesItem = (props) => {
               <p className="card-text">{props.description}</p>
               <form className="d-flex justify-content-between" role="search">
                 <button className="btn btn-outline-danger" onClick={deleteHandling}>Delete</button>
-                <button className="btn btn-outline-success" >Update</button>
+                <button className="btn btn-outline-success" onClick={toggleUpdateForm} >Update</button>
               </form>
             </div>
             <div className="card-footer">
@@ -71,6 +77,7 @@ const MoviesItem = (props) => {
         </div>
         
       </div>
+      {showUpdateForm && <UpdateMovieForm/>} {/* Render UpdateForm if showUpdateForm is true */}
     </div>
 
   );
