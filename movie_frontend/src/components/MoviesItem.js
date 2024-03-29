@@ -1,117 +1,78 @@
 import React from 'react'
+import { movieArray } from './Movies';
 
-const MoviesItem = () => {
+const MoviesItem = (props) => {
+
+  console.log(props.imageUrl);
+  console.log(props.title);
+  console.log(props.description);
+
+  const deleteHandling = () =>{
+    const confirmDelete = window.confirm(`Are you sure you want to delete "${props.title}"?`);
+    
+    
+    if (confirmDelete) {
+      // Find the index of the movie with the specified title
+      const indexToDelete = movieArray.findIndex(movie => movie.title === props.title);
+      
+      if (indexToDelete !== -1) {
+        // Remove the movie from movieArray
+        movieArray.splice(indexToDelete, 1);
+        console.log('Movie deleted:', props.title);
+        // You might also want to trigger a re-render of the component here,
+        // if movieArray is being used to render movies in another component
+      } else {
+        console.log('Movie not found in movieArray:', props.title);
+      }
+    }
+  }
   
   return (
-    <div className='pe-5 ps-5'>
-      <div className="row row-cols-1 row-cols-md-5 g-4 justify-content-center">
-  <div className="col">
-        <div className="card h-100">
+    <div>
+      <div className="row row-cols-1 row-cols-md-1 g-4 justify-content-center ">
+        <div className="col">
+          <div className="card h-100">
             <div style={{
-                    display: "flex",
-                    justifyContent: "flex-end",
-                    position: "absolute",
-                    right: 0,
-                }}
-                >
-                <span className=" badge rounded-pill bg-danger">UTV Movies</span>
+              display: "flex",
+              justifyContent: "flex-end",
+              position: "absolute",
+              right: 0,
+            }}
+            >
+              <span className=" badge rounded-pill bg-danger">UTV Movies</span>
             </div>
-      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQrf1EqCQd1hSL49ZO68WaeM5ncb-7oAxETisgIn3Ylqw&s" className="card-img-top" alt="..."/>
-      <div style={{
-                    display: "flex",
-                    justifyContent: "flex-end",
-                    position: "absolute",
-                    right: 0,
-                }}
-                >
-                <span className=" badge rounded-pill bg-danger">UTV Movies</span>
-            </div>
-      
-      <div className="card-body">
-        <h5 className="card-title">Card title</h5>
-        <p className="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-      </div>
-      <div className="card-footer">
-        <small className="text-body-secondary">Last updated 3 mins ago</small>
-      </div>
-    </div>
-  </div>
-  <div className="col">
-    <div className="card h-100">
-      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQrf1EqCQd1hSL49ZO68WaeM5ncb-7oAxETisgIn3Ylqw&s" className="card-img-top" alt="..."/>
-      <div style={{
-                    display: "flex",
-                    justifyContent: "flex-end",
-                    position: "absolute",
-                    right: 0,
-                }}
-                >
-                <span className=" badge rounded-pill bg-danger">UTV Movies</span>
+           
+            <img src={props.imageUrl}className="card-img-top" alt="..." />
+            <div style={{
+              display: "flex",
+              justifyContent: "flex-end",
+              position: "absolute",
+              right: 0,
+            }}
+            >
+             
             </div>
 
-      <div className="card-body">
-        <h5 className="card-title">Card title</h5>
-        <p className="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
-      </div>
-      <div className="card-footer">
-        <small className="text-body-secondary">Last updated 3 mins ago</small>
-      </div>
-    </div>
-  </div>
-  <div className="col">
-    <div className="card h-100">
-    <div style={{
-                    display: "flex",
-                    justifyContent: "flex-end",
-                    position: "absolute",
-                    right: 0,
-                }}
-                >
-                <span className=" badge rounded-pill bg-danger">UTV Movies</span>
+            <div className="card-body">
+              <div className='d-flex'>
+                 <h5 className="card-title me-3">{props.title}</h5>
+                <h6><span class="badge bg-secondary">New</span></h6>
+              </div>
+              <p className="card-text">{props.description}</p>
+              <form className="d-flex justify-content-between" role="search">
+                <button className="btn btn-outline-danger" onClick={deleteHandling}>Delete</button>
+                <button className="btn btn-outline-success" >Update</button>
+              </form>
             </div>
-      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQrf1EqCQd1hSL49ZO68WaeM5ncb-7oAxETisgIn3Ylqw&s" className="card-img-top" alt="..."/>
-      <div style={{
-                    display: "flex",
-                    justifyContent: "flex-end",
-                    position: "absolute",
-                    right: 0,
-                }}
-                >
-                <span className=" badge rounded-pill bg-danger">UTV Movies</span>
+            <div className="card-footer">
+              <small className="text-body-secondary">Last updated 3 mins ago</small>
             </div>
-      <div className="card-body">
-        <h5 className="card-title">Card title</h5>
-        <p className="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
-      </div>
-      <div className="card-footer">
-        <small className="text-body-secondary">Last updated 3 mins ago</small>
+          </div>
+        </div>
+        
       </div>
     </div>
-  </div>
-  <div className="col">
-    <div className="card h-100">
-      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQrf1EqCQd1hSL49ZO68WaeM5ncb-7oAxETisgIn3Ylqw&s" className="card-img-top" alt="..."/>
-      <div style={{
-                    display: "flex",
-                    justifyContent: "flex-end",
-                    position: "absolute",
-                    right: 0,
-                }}
-                >
-                <span className=" badge rounded-pill bg-danger">UTV Movies</span>
-            </div>
-      <div className="card-body">
-        <h5 className="card-title">Card title</h5>
-        <p className="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
-      </div>
-      <div className="card-footer">
-        <small className="text-body-secondary">Last updated 3 mins ago</small>
-      </div>
-    </div>
-  </div>
-</div>
-    </div>
-      
+
   );
 }
 

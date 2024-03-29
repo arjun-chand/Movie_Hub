@@ -1,6 +1,6 @@
 const Movie = require("../models/Movies");
 
-const createPost = async(req, res)=>{
+exports.createPost = async(req, res)=>{
 
     try{
         const movie = new Movie({
@@ -10,6 +10,7 @@ const createPost = async(req, res)=>{
             category: req.body.genre,
             image: req.file.filename
         })
+
        const movieData = await movie.save();
 
        res.status(200).send({success:true, msg:"movie-data", data:movieData});
@@ -19,7 +20,7 @@ const createPost = async(req, res)=>{
     }
 }
 
-const  getAllMovies = async(req,res) => {
+exports.getAllMovies = async(req,res) => {
     
   try{
      const movies = await Movie.find();
@@ -30,7 +31,7 @@ const  getAllMovies = async(req,res) => {
     
 }
 
-const deleteMovie = async(req, res) =>{
+exports.deleteMovie = async(req, res) =>{
     try{
        const name = req.param.name;
        await Movie.deleteOne({name: name})
@@ -41,8 +42,4 @@ const deleteMovie = async(req, res) =>{
     }
 }
 
-module.exports = {
-    createPost,
-    getAllMovies,
-    deleteMovie
-}
+ 

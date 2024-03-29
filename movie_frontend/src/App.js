@@ -26,6 +26,7 @@ const App = () => {
           <Route exact path="/romance" element={<Movies setProgress={setProgress} key="romance" pageSize={pageSize} category="romance" />} />
           <Route exact path="/adventure" element={<Movies setProgress={setProgress} key="adventure" pageSize={pageSize} category="adventure" />} />
           <Route exact path="/sifi" element={<Movies setProgress={setProgress} key="sifi" pageSize={pageSize} category="sifi" />} />
+          <Route exact path="/anime" element={<Movies setProgress={setProgress} key="anime" pageSize={pageSize} category="anime" />} />
           <Route exact path="/upload" element={<UploadMovieForm  key="upload" pageSize={pageSize} category="upload" />} />
         </Routes>
       </Router>
