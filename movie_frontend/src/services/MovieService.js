@@ -1,20 +1,17 @@
 import axios from "axios";
 
-class MovieService{
-    create(formData){
-        const url = "http://localhost:8000/api/upload";
-        const config = {
-            headers:{
-                'content-type':'multipart/form-data'
-            }
-        };
-        return axios.post(url,formData, config);
+const MovieService = {
+    create: function(formData) {
+        const url = "http://localhost:3001/movies/upload";
+       
+        return axios.post(url, formData);
     }
+};
 
-    deletePost(){
-        const url = "http://localhost:8000/api/delete";
-        return axios.get(url);
-    }
-}
+export const getPost = async function() {
+    const url = "http://localhost:3001/movies/"; 
+    const response = await axios.get(url)
+    return response;
+};
 
-export default new MovieService();
+export default MovieService;

@@ -7,7 +7,7 @@ const Navbar = () => {
   const navigate=useNavigate()
   
   return (
-    <div className='mb-5'>
+    <div style={{marginBottom:"32px"}}>
     <nav className="navbar fixed-top navbar-expand-lg bg-dark" data-bs-theme="dark">
       <div className="container-fluid">
         <Link className="navbar-brand" to="/">Movies</Link>

@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import MovieService from '../services/MovieService';
-import { movieArray } from './Movies';
 
 const UpdateMovieForm = () => {
   const [formData, setFormData] = useState({
@@ -50,36 +49,36 @@ const UpdateMovieForm = () => {
   //   event.target.reset();
   // }
 
-  const handleData = (event)=>{
-    event.preventDefault();
-    const updatedMovie = movieArray.find((movie) => movie.title === title);
-    // Extract form values from formData
-    const { title, description, date, image, category, rating, source } = formData;
+  // const handleData = (event)=>{
+  //   event.preventDefault();
+  //   const updatedMovie = movieArray.find((movie) => movie.title === title);
+  //   // Extract form values from formData
+  //   const { title, description, date, image, category, rating, source } = formData;
 
-    // Create a new movie object
-    if (updatedMovie) {
-      // Update the movie details
-     updatedMovie.title = title;
-     updatedMovie.description = description;
-     updatedMovie.date = date;
-     updatedMovie.image = image;
-     updatedMovie.category = category;
-     updatedMovie.rating = rating;
-     updatedMovie.source = source;
+  //   // Create a new movie object
+  //   if (updatedMovie) {
+  //     // Update the movie details
+  //    updatedMovie.title = title;
+  //    updatedMovie.description = description;
+  //    updatedMovie.date = date;
+  //    updatedMovie.image = image;
+  //    updatedMovie.category = category;
+  //    updatedMovie.rating = rating;
+  //    updatedMovie.source = source;
 
-      // Optionally, update the state or save to a backend server
-      // ...
+  //     // Optionally, update the state or save to a backend server
+  //     // ...
 
-      // Clear the form fields (optional)
-      setFormData({
-        movieName: '',
-        // Reset other form fields...
-      });
-    } else {
-      // Display an error message (movie not found)
-      console.log('Movie not found!');
-    }
-  };
+  //     // Clear the form fields (optional)
+  //     setFormData({
+  //       movieName: '',
+  //       // Reset other form fields...
+  //     });
+  //   } else {
+  //     // Display an error message (movie not found)
+  //     console.log('Movie not found!');
+  //   }
+  // };
 
     
    // Handle form input changes
@@ -92,7 +91,7 @@ const UpdateMovieForm = () => {
 
   return (
     <div className="d-flex justify-content-center align-items-center" style={{ minHeight: "100vh" }}>
-      <form onSubmit={handleData}>
+      <form>
         <div className="input-group mb-3 d-flex flex-column gap-2 p-5 card text-bg-dark mb-3" style={{ maxWidth: "30rem" }}>
           <h2 className='px-5'>Update Movie</h2>
           <div className="card-body d-flex flex-column gap-2">
