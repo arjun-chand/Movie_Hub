@@ -1,8 +1,13 @@
 const Movie = require("../model/movie.model")
 
-async function getMovies() {
+async function getMovies(queryParams) {
     try {
-        let MovieData = await Movie.find({})
+        let query = {};
+        if (queryParams.category) {
+            query.category = queryParams.category;
+        }
+       
+        let MovieData = await Movie.find(query)
         return MovieData
     } catch (error) {
         console.log(error)
@@ -11,7 +16,6 @@ async function getMovies() {
 
 async function addMovie(movie) {
     try {
-        console.log(movie)
         let MovieModel = new Movie(movie)
         let MovieData = await MovieModel.save(movie)
         return {success:true}
@@ -23,7 +27,7 @@ async function addMovie(movie) {
 async function updateMovie(MovieId, movie) {
     try {
         let response = await Movie.updateOne({ _id: MovieId }, movie)
-        return response
+        return {success:true}
     } catch (error) {
         console.log(error)
     }
@@ -32,7 +36,7 @@ async function updateMovie(MovieId, movie) {
 async function deleteMovie(MovieId) {
     try {
         let response = await Movie.remove({ _id: MovieId })
-        return response
+        return {success:true}
     } catch (error) {
         console.log(error)
     }

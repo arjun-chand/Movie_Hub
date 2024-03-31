@@ -8,10 +8,31 @@ const MovieService = {
     }
 };
 
-export const getPost = async function() {
-    const url = "http://localhost:3001/movies/"; 
+export const updatePost = async (id,data) => {
+    try {
+        const url = "http://localhost:3001/movies/update/" + id;
+        const response = await axios.put(url, data)
+        return response
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+export const getPost = async function(category) {
+    const url = "http://localhost:3001/movies?category="+category; 
     const response = await axios.get(url)
     return response;
 };
+
+export const deletePost = async (id) => {
+    try {
+        const url = "http://localhost:3001/movies/delete/" + id;
+        const response = await axios.delete(url)
+        return response
+
+    } catch (error) {
+        console.log(error)
+    }
+}
 
 export default MovieService;

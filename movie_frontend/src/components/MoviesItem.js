@@ -1,22 +1,49 @@
 import React, { useState } from 'react'
 import UpdateMovieForm from './UpdateMovieForm'
+import { deletePost } from '../services/MovieService';
+import { Navigate, useNavigate } from 'react-router-dom';
+
 
 const MoviesItem = (props) => {
   const [showUpdateForm, setShowUpdateForm] = useState(false);
+  const navigate = useNavigate();
+
+  console.log(showUpdateForm)
 
   const toggleUpdateForm = () => {
     setShowUpdateForm(!showUpdateForm);
   };
 
-  console.log(props.imageUrl);
-  console.log(props.title);
-  console.log(props.description);
-
+  const handleDelete = async (id) => {
+    try {
+      const response = await deletePost(id)
+      if (response.data.success) {
+        props.readData()
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  }
+  const handleCardClick = () => {
+    // Navigate to the "/moviedetails" route and pass props
+    navigate("/moviedetails", {
+      state: {
+        title: props.title,
+        description: props.description,
+        director: props.director,
+        date: props.date,
+        category: props.category,
+        source: props.source,
+        rating: props.rating,
+        image: props.imageUrl
+      }
+    });
+  };
   
   return (
     <div>
-      <div className="row row-cols-1 row-cols-md-1 g-4 justify-content-center ">
-        <div className="col">
+      {!showUpdateForm && <div className="row row-cols-1 row-cols-md-1 g-4 justify-content-center ">
+        <div className="zoom col" onClick={handleCardClick}>
           <div className="card h-100">
             <div style={{
               display: "flex",
@@ -28,7 +55,7 @@ const MoviesItem = (props) => {
               <span className=" badge rounded-pill bg-danger">UTV Movies</span>
             </div>
            
-            <img src={props.imageUrl}className="card-img-top" style={{height:"400px"}} alt="..." />
+            <img src={props.imageUrl} className="card-img-top" style={{ height: "400px" }} alt="..." />
             <div style={{
               display: "flex",
               justifyContent: "flex-end",
@@ -41,12 +68,12 @@ const MoviesItem = (props) => {
 
             <div className="card-body">
               <div className='d-flex'>
-                 <h5 className="card-title me-3">{props.title}</h5>
+                <h5 className="card-title me-3">{props.title}</h5>
                 <h6><span className="badge bg-secondary">New</span></h6>
               </div>
               <p className="card-text">{props.description}</p>
               <form className="d-flex justify-content-between" role="search">
-                <button className="btn btn-outline-danger" >Delete</button>
+                <button className="btn btn-outline-danger" onClick={() => handleDelete(props.id)}>Delete</button>
                 <button className="btn btn-outline-success" onClick={toggleUpdateForm} >Update</button>
               </form>
             </div>
@@ -56,8 +83,8 @@ const MoviesItem = (props) => {
           </div>
         </div>
         
-      </div>
-      {showUpdateForm && <UpdateMovieForm/>} {/* Render UpdateForm if showUpdateForm is true */}
+      </div>}
+      {showUpdateForm && <UpdateMovieForm toggleUpdateForm={toggleUpdateForm} data={props} />} {/* Render UpdateForm if showUpdateForm is true */}
     </div>
 
   );

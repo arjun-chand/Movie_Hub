@@ -16,14 +16,14 @@ const Navbar = () => {
         </button>
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-            <li className="nav-item"><Link className="nav-link active" aria-current="page" to="/">Entertainment</Link></li>
-            <li className="nav-item"><Link className="nav-link active" aria-current="page" to="/comedy">Comedy</Link></li>
-            <li className="nav-item"><Link className="nav-link active" aria-current="page" to="/horror">Horror</Link></li>
-            <li className="nav-item"><Link className="nav-link active" aria-current="page" to="/action">Action</Link></li>
-            <li className="nav-item"><Link className="nav-link active" aria-current="page" to="/romance">Romance</Link></li>
-            <li className="nav-item"><Link className="nav-link active" aria-current="page" to="/adventure">Adventure</Link></li>
-            <li className="nav-item"><Link className="nav-link active" aria-current="page" to="/anime">Anime</Link></li>
-            <li className="nav-item"><Link className="nav-link active" aria-current="page" to="/sifi">Science Fiction</Link></li>
+              <li className="nav-item"><Link className=" navlink nav-link active" aria-current="page" to="/entertainment">Entertainment</Link></li>
+            <li className="nav-item"><Link className="navlink nav-link active" aria-current="page" to="/comedy">Comedy</Link></li>
+            <li className="nav-item"><Link className="navlink nav-link active" aria-current="page" to="/horror">Horror</Link></li>
+            <li className="nav-item"><Link className="navlink nav-link active" aria-current="page" to="/action">Action</Link></li>
+            <li className="nav-item"><Link className="navlink nav-link active" aria-current="page" to="/romance">Romance</Link></li>
+            <li className="nav-item"><Link className="navlink nav-link active" aria-current="page" to="/adventure">Adventure</Link></li>
+            <li className="nav-item"><Link className="navlink nav-link active" aria-current="page" to="/anime">Anime</Link></li>
+            <li className="nav-item"><Link className="navlink nav-link active" aria-current="page" to="/sifi">Science Fiction</Link></li>
             
           </ul>
           <form className="d-flex" role="search">

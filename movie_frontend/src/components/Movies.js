@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import LoadingBar from 'react-top-loading-bar';
-import Spinner from './Spinner';
-import InfiniteScroll from 'react-infinite-scroll-component';
+
 import MoviesItem from './MoviesItem';
 import PropTypes from 'prop-types';
 import { getPost } from '../services/MovieService';
@@ -17,7 +16,7 @@ const Movies = (props) => {
   const getMovies = async () =>{
 
    try {
-    const response  = await getPost();
+    const response  = await getPost(props.category);
     setMovie(response.data);
    } catch (error) {
     
@@ -48,7 +47,7 @@ const Movies = (props) => {
     // updateMovies();
     // // eslint-disable-next-line
     getMovies();
-  }, []);
+  }, [props.category]);
 
   
   const fetchMoreData = async () => {
@@ -69,32 +68,30 @@ const Movies = (props) => {
         <h1 className="text-center" style={{ margin: '35px 0px marginTop', marginTop: '100px' }}>MoviesHub - Top {capitalizeFirstLetter(props.category)} Movies</h1>
         {/* {LoadingBar && <Spinner />} */}
         {movie && (
-          <InfiniteScroll
-            dataLength={movie.length}
-            next={fetchMoreData}
-            hasMore={movie.length !== totalResults}
-            loader={<Spinner />}
-          >
+          <div>
             <div className="container">
               <div className="row">
                 {movie.map((element,index) => {
                   return (
                     <div className="col-md-3 my-4 " key={element.url}>
                       <MoviesItem
-                        index={index}
+                        id={element._id}
+                        readData={getMovies}
                         title={element.title ? element.title : ""}
                         description={element.description ? element.description : ""}
                         imageUrl={element.image}
                         date={element.publishedAt}
                         category = {element.category}
                         source={element.source}
+                        rating={element.rating}
+                        director={element.director}
                       />
                     </div>
                   );
                 })}
               </div>
             </div>
-          </InfiniteScroll>
+          </div>
         )}
       </>
 
