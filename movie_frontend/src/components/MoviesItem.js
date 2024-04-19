@@ -11,8 +11,6 @@ const MoviesItem = (props) => {
   const navigate = useNavigate();
   const formRef = useRef(null);
 
-  console.log(showUpdateForm)
-
   const toggleUpdateForm = () => {
     setShowUpdateForm(!showUpdateForm);
   };

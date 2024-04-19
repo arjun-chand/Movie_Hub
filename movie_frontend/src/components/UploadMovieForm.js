@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import MovieService from '../services/MovieService';
 import { useNavigate } from 'react-router-dom';
 

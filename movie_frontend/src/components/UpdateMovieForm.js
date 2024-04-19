@@ -30,7 +30,6 @@ const UpdateMovieForm = (props) => {
   }
 
   const handleSetData = () => {
-    console.log(props.data)
     setFormData((prev) => ({ ...prev, title:props.data.title}))
     setFormData((prev) => ({ ...prev, description:props.data.description}))
     setFormData((prev) => ({ ...prev, director:props.data.director}))
@@ -43,7 +42,7 @@ const UpdateMovieForm = (props) => {
   }
 
   useEffect(() => {
-    handleSetData()
+    handleSetData()// eslint-disable-next-line 
   },[props.data])
 
   
