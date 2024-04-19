@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from 'react'
-import MovieService, { updatePost } from '../services/MovieService';
+import React, {useEffect, useState } from 'react'
+import { updatePost } from '../services/MovieService';
+
 
 const UpdateMovieForm = (props) => {
   const [formData, setFormData] = useState({
@@ -20,7 +21,8 @@ const UpdateMovieForm = (props) => {
       const response = await updatePost(props.data.id, formData)
       if (response.data.success) {
         props.data.readData();
-        props.toggleUpdateForm()
+        props.toggleUpdateForm();
+
       }
     } catch (error) {
       console.log(error)
@@ -37,6 +39,7 @@ const UpdateMovieForm = (props) => {
     setFormData((prev) => ({ ...prev, category:props.data.category}))
     setFormData((prev) => ({ ...prev, rating:props.data.rating}))
     setFormData((prev) => ({ ...prev, source:props.data.source}))
+
   }
 
   useEffect(() => {
@@ -48,15 +51,16 @@ const UpdateMovieForm = (props) => {
    const handleInputChange = (event) => {
     const { name, value } = event.target;
     setFormData({ ...formData, [name]: value });
+
   };
   
 
 
   return (
-    <div className="d-flex justify-content-center align-items-center" style={{ minHeight: "100vh" }}>
+    <div className="d-flex justify-content-center align-items-center z-3 position-absolute p-0 rounded-3" style={{ minHeight: "100vh" }}>
        <form onSubmit={handleUpdate} className='forms'>
          <div className="input-group mb-3 d-flex flex-column gap-2 p-5 card text-bg-dark mb-3" style={{ maxWidth: "80rem" }}>
-           <h2 className='px-5'>Upload a Movie</h2>
+           <h2 className='px-5'>Update a Movie</h2>
            <div className="card-body d-flex flex-column gap-2">
             <div className="d-flex gap-2">
               <input className='p-1 rounded' type="text" name='title' placeholder='Enter Title Of The Movie' onChange={handleInputChange} value={formData.title} required />
@@ -65,8 +69,8 @@ const UpdateMovieForm = (props) => {
              <input className='p-1 rounded' type="text" name='director' placeholder='Enter Name of The Director Of The Movie' onChange={handleInputChange} value={formData.director} required />
              <textarea className='p-1 rounded' type="textarea" name='description' placeholder='Enter Description Of The Movie' onChange={handleInputChange} value={formData.description} required />
 
-             <label for="cars">Choose a Category:</label>
-             <select className='p-1 rounded'  name='category' onChange={handleInputChange} value={formData.category} required>
+             <label htmlFor="category">Choose a Category:</label>
+             <select className='p-1 rounded' id='category' name='category' onChange={handleInputChange} value={formData.category} required>
                 <option value="entertainment">Entertainment</option>
                 <option value="comedy">Comedy</option>
                 <option value="romance">Romance</option>
@@ -75,8 +79,8 @@ const UpdateMovieForm = (props) => {
                 <option value="adventure">Adventure</option>
                 <option value="horror">Horror</option>
               </select>
-              <label for="cars">Select Rating of the Movie</label>
-             <select className='p-1 rounded' name='rating' placeholder='Enter Rating Of The Movie' onChange={handleInputChange} value={formData.rating} >
+              <label htmlFor="rating">Select Rating of the Movie</label>
+             <select className='p-1 rounded' id='rating' name='rating' placeholder='Enter Rating Of The Movie' onChange={handleInputChange} value={formData.rating} >
                 <option value ="1">1</option>
                 <option value ="2">2</option>
                 <option value ="3">3</option>

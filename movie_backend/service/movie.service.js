@@ -1,3 +1,4 @@
+const movieModel = require("../model/movie.model");
 const Movie = require("../model/movie.model")
 
 async function getMovies(queryParams) {
@@ -16,8 +17,11 @@ async function getMovies(queryParams) {
 
 async function addMovie(movie) {
     try {
-        let MovieModel = new Movie(movie)
-        let MovieData = await MovieModel.save(movie)
+        let MovieModel = new Movie(movie);
+
+
+        await MovieModel.save();
+
         return {success:true}
     } catch (error) {
         console.log(error)

@@ -1,19 +1,22 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import MovieService from '../services/MovieService';
 import { useNavigate } from 'react-router-dom';
 
+
 const UploadMovieForm = () => {
+  
   const [formData, setFormData] = useState({
     title: '',
     date:'',
     director:'',
     description: '',
     image:'',
-    category:'',
+    category:null,
     rating:'',
     source:''
   });
 
+  console.log(formData.category);
   const [message, setMessage] = useState('');
   const navigate = useNavigate();
   const handleSubmit = async (event) => {
@@ -25,9 +28,12 @@ const UploadMovieForm = () => {
     if (response.data.success === true) {
       
       setMessage('Movie uploaded Successfully');
+   
       navigate("/");
     } else {
+      console.log(response.data)
       setMessage('Movie not uploaded');
+   
     }
 
     setTimeout(function () {
@@ -56,8 +62,10 @@ const UploadMovieForm = () => {
              <input className='p-1 rounded' type="text" name='director' placeholder='Enter Name of The Director Of The Movie' onChange={handleInputChange} value={formData.director} required />
              <textarea className='p-1 rounded' type="textarea" name='description' placeholder='Enter Description Of The Movie' onChange={handleInputChange} value={formData.description} required />
 
-             <label for="cars">Choose a Category:</label>
-             <select className='p-1 rounded'  name='category' onChange={handleInputChange} value={formData.category} required>
+             <label htmlFor="category">Choose a Category:</label>
+             <select className='p-1 rounded' id='category'  name='category' onChange={handleInputChange} value={formData.category} required>
+
+                <option value="choose an option">---Choose an option---</option>
                 <option value="entertainment">Entertainment</option>
                 <option value="comedy">Comedy</option>
                 <option value="romance">Romance</option>
@@ -66,8 +74,8 @@ const UploadMovieForm = () => {
                 <option value="adventure">Adventure</option>
                 <option value="horror">Horror</option>
               </select>
-              <label for="cars">Select Rating of the Movie</label>
-             <select className='p-1 rounded' name='rating' placeholder='Enter Rating Of The Movie' onChange={handleInputChange} value={formData.rating} >
+              <label htmlFor="rating">Select Rating of the Movie</label>
+             <select className='p-1 rounded' id='rating' name='rating' placeholder='Enter Rating Of The Movie' onChange={handleInputChange} value={formData.rating} >
                 <option value ="1">1</option>
                 <option value ="2">2</option>
                 <option value ="3">3</option>

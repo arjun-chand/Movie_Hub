@@ -1,12 +1,15 @@
 import React, { useState } from 'react'
 import UpdateMovieForm from './UpdateMovieForm'
 import { deletePost } from '../services/MovieService';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { useRef } from 'react';
+import { useEffect } from 'react';
 
 
 const MoviesItem = (props) => {
   const [showUpdateForm, setShowUpdateForm] = useState(false);
   const navigate = useNavigate();
+  const formRef = useRef(null);
 
   console.log(showUpdateForm)
 
@@ -39,11 +42,24 @@ const MoviesItem = (props) => {
       }
     });
   };
+
+  const handleClickOutside = (event) => {
+    if (formRef.current && !formRef.current.contains(event.target)) {
+      setShowUpdateForm(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
   
   return (
     <div>
       {!showUpdateForm && <div className="row row-cols-1 row-cols-md-1 g-4 justify-content-center ">
-        <div className="zoom col" onClick={handleCardClick}>
+        <div className="zoom col" >
           <div className="card h-100">
             <div style={{
               display: "flex",
@@ -55,7 +71,7 @@ const MoviesItem = (props) => {
               <span className=" badge rounded-pill bg-danger">UTV Movies</span>
             </div>
            
-            <img src={props.imageUrl} className="card-img-top" style={{ height: "400px" }} alt="..." />
+            <img src={props.imageUrl} className="card-img-top" style={{ height: "400px" }} alt="..." onClick={handleCardClick} />
             <div style={{
               display: "flex",
               justifyContent: "flex-end",
@@ -84,7 +100,11 @@ const MoviesItem = (props) => {
         </div>
         
       </div>}
-      {showUpdateForm && <UpdateMovieForm toggleUpdateForm={toggleUpdateForm} data={props} />} {/* Render UpdateForm if showUpdateForm is true */}
+      {showUpdateForm && (
+        <div ref={formRef}>
+          <UpdateMovieForm toggleUpdateForm={toggleUpdateForm} data={props} />
+        </div>
+      )}
     </div>
 
   );

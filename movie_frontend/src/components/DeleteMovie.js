@@ -1,6 +1,12 @@
 import React from 'react'
+import alertContext from '../context/AlertContext'
 
 const DeleteMovie = () => {
+  const context = useContext(alertContext)
+  const { showAlert } = context;
+  handleSubmit=()=>{
+    showAlert('Movie Deleted successfully','success')
+  }
   return (
     <div>
        <h2>Upload a Movie</h2>
